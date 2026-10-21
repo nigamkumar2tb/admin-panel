@@ -9124,6 +9124,25 @@
         }
     }
 
+    // 3. Specific User Notification Function (For Enquiries and Mentorship)
+    async function sendNotificationToSpecificUser(userId, title, message) {
+        try {
+            const userDoc = await db.collection("users").doc(userId).get();
+            if (!userDoc.exists) {
+                alert("Student profile not found!");
+                return;
+            }
+            const fcmToken = userDoc.data().fcmToken;
+            if (!fcmToken) {
+                alert("Student's device token not found!");
+                return;
+            }
+            alert(`Notification ready for the specific user!`);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
 </script> <!-- यह टैग वही है जो आपकी स्क्रीन में दिख रहा है -->
 
   <!-- Toast Notification Container -->
